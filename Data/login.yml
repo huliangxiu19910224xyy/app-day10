@@ -1,0 +1,31 @@
+test_login_001:
+  phone: "15956472129"
+  passwd: "hlx19910224"
+  expect_result: "我的优惠券"
+  tag: 1
+
+test_login_002:
+  phone: " 15956472129"
+  passwd: "hlx19910224"
+  expect_result: "我的优惠券"
+  tag: 1
+
+test_login_003:
+  phone: "15956472129 "
+  passwd: "hlx19910224"
+  expect_result: "我的优惠券"
+  tag: 1
+
+test_login_004:
+  phone: "15956472129"
+  passwd: "19910224"
+  tag_mess: "密码错误"
+  expect_result: "登录密码错误"
+
+test_login_010:
+  phone: "13555555555"
+  passwd: "19910224"
+  tag_mess: "此用户"
+  expect_result: "此用户不存在"
+
+

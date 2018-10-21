@@ -1,0 +1,281 @@
+<ns0:test-suite xmlns:ns0="urn:model.allure.qatools.yandex.ru" start="1540094114516" stop="1540094198658">
+  <name>test_login</name>
+  <labels/>
+  <test-cases>
+    <test-case start="1540094114516" status="passed" stop="1540094146487">
+      <description>
+        :param test_num:
+        :param phone:
+        :param passwd:
+        :param tag:
+        :param tag_mess:
+        :param expect_result:
+        :return:
+        </description>
+      <name>Test_Login.test_login[test_login_001-15956472129-hlx19910224-1-None-\u6211\u7684\u4f18\u60e0\u5238]</name>
+      <attachments/>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="16708-MainThread"/>
+        <label name="host" value="DESKTOP-EP4O44D"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1540094146488" status="passed" stop="1540094160538">
+      <description>
+        :param test_num:
+        :param phone:
+        :param passwd:
+        :param tag:
+        :param tag_mess:
+        :param expect_result:
+        :return:
+        </description>
+      <name>Test_Login.test_login[test_login_002- 15956472129-hlx19910224-1-None-\u6211\u7684\u4f18\u60e0\u5238]</name>
+      <attachments/>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="16708-MainThread"/>
+        <label name="host" value="DESKTOP-EP4O44D"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1540094160539" status="passed" stop="1540094174594">
+      <description>
+        :param test_num:
+        :param phone:
+        :param passwd:
+        :param tag:
+        :param tag_mess:
+        :param expect_result:
+        :return:
+        </description>
+      <name>Test_Login.test_login[test_login_003-15956472129 -hlx19910224-1-None-\u6211\u7684\u4f18\u60e0\u5238]</name>
+      <attachments/>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="16708-MainThread"/>
+        <label name="host" value="DESKTOP-EP4O44D"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1540094174595" status="failed" stop="1540094186574">
+      <description>
+        :param test_num:
+        :param phone:
+        :param passwd:
+        :param tag:
+        :param tag_mess:
+        :param expect_result:
+        :return:
+        </description>
+      <name>Test_Login.test_login[test_login_004-15956472129-19910224-None-None-\u767b\u5f55\u5bc6\u7801\u9519\u8bef]</name>
+      <failure>
+        <message>TimeoutException: Message: 
+</message>
+        <stack-trace>self = &lt;test_login.Test_Login object at 0x0000015AC6A13518&gt;
+test_num = 'test_login_004', phone = '15956472129', passwd = '19910224'
+tag = None, tag_mess = None, expect_result = '登录密码错误'
+
+    @pytest.mark.parametrize("test_num,phone,passwd,tag,tag_mess,expect_result",get_login_data())
+    def test_login(self,test_num,phone,passwd,tag,tag_mess,expect_result):
+        """
+            :param test_num:
+            :param phone:
+            :param passwd:
+            :param tag:
+            :param tag_mess:
+            :param expect_result:
+            :return:
+            """
+        # 点击我的
+        self.page_obj.get_home_page_obj().click_my_btn()
+        # 点击已有账号，去登陆
+        self.page_obj.get_sign_page_obj().click_exist_btn()
+        # 登录操作
+        self.page_obj.get_login_page_obj().login(phone,passwd)
+        # 判断成功失败用例
+        if tag:  # 预期成功的用例
+            try:  #断言我的优惠券在不在个人中心页面，如果内容改变也不影响后面退出操作
+                # 优惠券
+                coupons = self.page_obj.get_person_page_obj().get_con_text()
+                try:
+                    # 断言
+                    assert coupons == expect_result
+                except AssertionError as e:
+                    print(e.__str__())
+                # 执行退出操作
+                # 点击设置
+                self.page_obj.get_person_page_obj().click_setting_btn()
+                self.page_obj.get_setting_page_obj().click_logou_btn()
+    
+            except TimeoutException as e:  # 如果预期成功的用例没有登录成功，关闭登录页面
+                # 关闭登录页面
+                self.page_obj.get_login_page_obj().close_login_page()
+                assert False
+    
+        else:
+            # 预期失败的用例
+            try:
+                # 获取toast消息
+&gt;               toast_mess = self.page_obj.get_login_page_obj().get_toast(tag_mess)
+
+scripts\test_login.py:71: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+Base\Base.py:73: in get_toast
+    toast_mess = self.search_element((By.XPATH,toast_xpath),timeout=5, poll_frequency=0.5)
+Base\Base.py:16: in search_element
+    return WebDriverWait(self.driver, timeout, poll_frequency).until(lambda x: x.find_element(*loc))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;selenium.webdriver.support.wait.WebDriverWait (session="ad14deb2-fcb3-466d-8b38-0c626b46b2af")&gt;
+method = &lt;function Base.search_element.&lt;locals&gt;.&lt;lambda&gt; at 0x0000015AC6A098C8&gt;
+message = ''
+
+    def until(self, method, message=''):
+        """Calls the method provided with the driver as an argument until the \
+            return value is not False."""
+        screen = None
+        stacktrace = None
+    
+        end_time = time.time() + self._timeout
+        while True:
+            try:
+                value = method(self._driver)
+                if value:
+                    return value
+            except self._ignored_exceptions as exc:
+                screen = getattr(exc, 'screen', None)
+                stacktrace = getattr(exc, 'stacktrace', None)
+            time.sleep(self._poll)
+            if time.time() &gt; end_time:
+                break
+&gt;       raise TimeoutException(message, screen, stacktrace)
+E       selenium.common.exceptions.TimeoutException: Message:
+
+c:\python\python36\lib\site-packages\selenium\webdriver\support\wait.py:80: TimeoutException</stack-trace>
+      </failure>
+      <attachments/>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="16708-MainThread"/>
+        <label name="host" value="DESKTOP-EP4O44D"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1540094186579" status="failed" stop="1540094198658">
+      <description>
+        :param test_num:
+        :param phone:
+        :param passwd:
+        :param tag:
+        :param tag_mess:
+        :param expect_result:
+        :return:
+        </description>
+      <name>Test_Login.test_login[test_login_010-13555555555-19910224-None-None-\u6b64\u7528\u6237\u4e0d\u5b58\u5728]</name>
+      <failure>
+        <message>TimeoutException: Message: 
+</message>
+        <stack-trace>self = &lt;test_login.Test_Login object at 0x0000015AC6A6DD30&gt;
+test_num = 'test_login_010', phone = '13555555555', passwd = '19910224'
+tag = None, tag_mess = None, expect_result = '此用户不存在'
+
+    @pytest.mark.parametrize("test_num,phone,passwd,tag,tag_mess,expect_result",get_login_data())
+    def test_login(self,test_num,phone,passwd,tag,tag_mess,expect_result):
+        """
+            :param test_num:
+            :param phone:
+            :param passwd:
+            :param tag:
+            :param tag_mess:
+            :param expect_result:
+            :return:
+            """
+        # 点击我的
+        self.page_obj.get_home_page_obj().click_my_btn()
+        # 点击已有账号，去登陆
+        self.page_obj.get_sign_page_obj().click_exist_btn()
+        # 登录操作
+        self.page_obj.get_login_page_obj().login(phone,passwd)
+        # 判断成功失败用例
+        if tag:  # 预期成功的用例
+            try:  #断言我的优惠券在不在个人中心页面，如果内容改变也不影响后面退出操作
+                # 优惠券
+                coupons = self.page_obj.get_person_page_obj().get_con_text()
+                try:
+                    # 断言
+                    assert coupons == expect_result
+                except AssertionError as e:
+                    print(e.__str__())
+                # 执行退出操作
+                # 点击设置
+                self.page_obj.get_person_page_obj().click_setting_btn()
+                self.page_obj.get_setting_page_obj().click_logou_btn()
+    
+            except TimeoutException as e:  # 如果预期成功的用例没有登录成功，关闭登录页面
+                # 关闭登录页面
+                self.page_obj.get_login_page_obj().close_login_page()
+                assert False
+    
+        else:
+            # 预期失败的用例
+            try:
+                # 获取toast消息
+&gt;               toast_mess = self.page_obj.get_login_page_obj().get_toast(tag_mess)
+
+scripts\test_login.py:71: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+Base\Base.py:73: in get_toast
+    toast_mess = self.search_element((By.XPATH,toast_xpath),timeout=5, poll_frequency=0.5)
+Base\Base.py:16: in search_element
+    return WebDriverWait(self.driver, timeout, poll_frequency).until(lambda x: x.find_element(*loc))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;selenium.webdriver.support.wait.WebDriverWait (session="ad14deb2-fcb3-466d-8b38-0c626b46b2af")&gt;
+method = &lt;function Base.search_element.&lt;locals&gt;.&lt;lambda&gt; at 0x0000015AC6A882F0&gt;
+message = ''
+
+    def until(self, method, message=''):
+        """Calls the method provided with the driver as an argument until the \
+            return value is not False."""
+        screen = None
+        stacktrace = None
+    
+        end_time = time.time() + self._timeout
+        while True:
+            try:
+                value = method(self._driver)
+                if value:
+                    return value
+            except self._ignored_exceptions as exc:
+                screen = getattr(exc, 'screen', None)
+                stacktrace = getattr(exc, 'stacktrace', None)
+            time.sleep(self._poll)
+            if time.time() &gt; end_time:
+                break
+&gt;       raise TimeoutException(message, screen, stacktrace)
+E       selenium.common.exceptions.TimeoutException: Message:
+
+c:\python\python36\lib\site-packages\selenium\webdriver\support\wait.py:80: TimeoutException</stack-trace>
+      </failure>
+      <attachments/>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="16708-MainThread"/>
+        <label name="host" value="DESKTOP-EP4O44D"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+  </test-cases>
+</ns0:test-suite>
